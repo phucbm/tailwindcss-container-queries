@@ -114,9 +114,43 @@ module.exports = {
   theme: {
     extend: {
       containers: {
+        // Min-width container queries (default)
         '2xs': '16rem',
+
+        // Max-width container queries (new)
+        'mobile': { max: '30rem' },   // @mobile applies when container width ≤ 30rem (480px)
+        'tablet': { max: '48rem' },   // @tablet applies when container width ≤ 48rem (768px)
+
+        // You can also explicitly define min-width using the object syntax
+        'desktop': { min: '64rem' },  // Same as: 'desktop': '64rem'
       },
     },
   },
 }
 ```
+
+### Container Query Types
+
+The configuration API is inspired by Tailwind's `screens` configuration, using the same syntax and structure.
+
+#### Min-width Queries (Default)
+When using a string value, the plugin creates a min-width container query:
+
+```js
+containers: {
+  'sm': '24rem'  // Creates: @container (min-width: 24rem)
+}
+```
+
+#### Max-width Queries
+To create max-width container queries, use an object with the `max` property:
+
+```js
+containers: {
+  'mobile': { max: '30rem' }  // Creates: @container (max-width: 30rem)
+}
+```
+
+This allows you to apply styles when a container is smaller than a specified width, which is useful for mobile-first approaches or adapting layouts for smaller container contexts.
+
+The object syntax matches how you would configure responsive breakpoints in Tailwind's `screens` option, making it familiar and consistent with the rest of your Tailwind configuration.
